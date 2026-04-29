@@ -1,0 +1,21 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/).
+
+## [Unreleased]
+
+## 0.1.0 (April 29, 2026)
+
+Initial release. Embed the [Crumb](https://crumb.bmlt.app/) BMLT meeting-finder widget in Joomla 4, 5, or 6 sites.
+
+### Added
+- **Content plugin** (`plg_content_crumb`) — replaces `{crumb …}` shortcodes in articles. Per-shortcode args (`server`, `service_body`, `view`, `geolocation`) override the plugin's saved params.
+- **Site module** (`mod_crumb`) — renders the widget in any Joomla module position.
+- **Package** (`pkg_crumb`) — single-zip install bundling both extensions.
+- **Settings** on plugin and module: BMLT server URL, service body IDs, default view (list/map), CSS template (full-width / full-width-force), base path for History API pretty URLs, and a JSON `widget_config` for advanced `CrumbWidgetConfig` options (dark mode, geolocation, columns, etc.).
+- **Docker Compose dev harness** (Joomla 5 LTS by default; Joomla 6 via `JOOMLA_TAG` build arg) with a `Makefile` covering build / install / lint / test / shell / nuke.
+- **PHPUnit unit tests** for the renderer (server-required guard, attribute escaping, view validation, base-path normalization, JSON widget-config emission, override precedence).
+- **GitHub Actions CI**: lint, multi-version PHPUnit (8.2 / 8.3 / 8.4), XML manifest validation, package build on PR (artifact uploaded), GitHub release with attached zip on tag push.

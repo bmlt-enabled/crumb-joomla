@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="package" method="upgrade">
+    <name>Crumb</name>
+    <author>bmlt-enabled</author>
+    <creationDate>2026-04-29</creationDate>
+    <copyright>Copyright (C) 2026 bmlt-enabled. All rights reserved.</copyright>
+    <license>GPL v2 or later</license>
+    <authorEmail>bmlt-enabled@googlegroups.com</authorEmail>
+    <authorUrl>https://github.com/bmlt-enabled/crumb-joomla</authorUrl>
+    <packagename>crumb</packagename>
+    <version>0.1.0</version>
+    <url>https://github.com/bmlt-enabled/crumb-joomla</url>
+    <packager>bmlt-enabled</packager>
+    <packagerurl>https://github.com/bmlt-enabled</packagerurl>
+    <description>PKG_CRUMB_XML_DESCRIPTION</description>
+
+    <files folder="packages">
+        <file type="plugin" id="crumb" group="content">plg_content_crumb.zip</file>
+        <file type="module" id="mod_crumb" client="site">mod_crumb.zip</file>
+    </files>
+
+    <languages folder="language">
+        <language tag="en-GB">en-GB/pkg_crumb.sys.ini</language>
+    </languages>
+</extension>

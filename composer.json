@@ -1,0 +1,39 @@
+{
+  "name": "bmlt-enabled/crumb-joomla",
+  "description": "Crumb Joomla package — embeds the Crumb meeting finder widget. Supports Joomla 4, 5, and 6.",
+  "type": "joomla-package",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "bmlt-enabled"
+    }
+  ],
+  "require": {
+    "php": ">=8.2"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.13",
+    "phpcompatibility/php-compatibility": "^9.3",
+    "phpunit/phpunit": "^10.5"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "BmltEnabled\\Plugin\\Content\\Crumb\\Helper\\": "packages/plugin/src/Helper/",
+      "BmltEnabled\\Module\\Crumb\\Site\\Helper\\": "packages/module/src/Helper/",
+      "Tests\\Unit\\": "tests/Unit/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "platform": {
+      "php": "8.2.0"
+    }
+  },
+  "scripts": {
+    "lint": "vendor/bin/phpcs",
+    "fmt": "vendor/bin/phpcbf",
+    "test": "vendor/bin/phpunit"
+  }
+}

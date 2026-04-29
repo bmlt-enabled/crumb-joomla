@@ -1,0 +1,47 @@
+services:
+  joomla:
+    depends_on:
+      db:
+        condition: service_healthy
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      JOOMLA_DB_HOST: db
+      JOOMLA_DB_NAME: joomla
+      JOOMLA_DB_USER: joomla
+      JOOMLA_DB_PASSWORD: joomla
+      JOOMLA_SITE_NAME: "Crumb Dev"
+      JOOMLA_ADMIN_USER: "Admin User"
+      JOOMLA_ADMIN_USERNAME: admin
+      JOOMLA_ADMIN_PASSWORD: adminadminadmin
+      JOOMLA_ADMIN_EMAIL: admin@example.com
+      PHP_IDE_CONFIG: "serverName=crumb"
+    volumes:
+      # Live-mount the source so edits in plugin/module are reflected after
+      # an `extension:discover_install` (or a `make install`).
+      - .:/opt/crumb-src
+      - joomla_data:/var/www/html
+
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: somejoomla
+      MARIADB_DATABASE: joomla
+      MARIADB_USER: joomla
+      MARIADB_PASSWORD: joomla
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  joomla_data:
+  db_data:

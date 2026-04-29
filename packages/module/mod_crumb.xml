@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>mod_crumb</name>
+    <author>bmlt-enabled</author>
+    <creationDate>2026-04-29</creationDate>
+    <copyright>Copyright (C) 2026 bmlt-enabled. All rights reserved.</copyright>
+    <license>GPL v2 or later</license>
+    <authorEmail>bmlt-enabled@googlegroups.com</authorEmail>
+    <authorUrl>https://github.com/bmlt-enabled/crumb-joomla</authorUrl>
+    <version>0.1.0</version>
+    <description>MOD_CRUMB_XML_DESCRIPTION</description>
+    <namespace path="src">BmltEnabled\Module\Crumb\Site</namespace>
+
+    <files>
+        <folder module="mod_crumb">services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <languages>
+        <language tag="en-GB">language/en-GB/mod_crumb.ini</language>
+        <language tag="en-GB">language/en-GB/mod_crumb.sys.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="server"
+                    type="url"
+                    label="MOD_CRUMB_FIELD_SERVER_LABEL"
+                    description="MOD_CRUMB_FIELD_SERVER_DESC"
+                    hint="https://your-server/main_server"
+                    filter="url"
+                    required="true"
+                />
+                <field
+                    name="service_body"
+                    type="text"
+                    label="MOD_CRUMB_FIELD_SERVICE_BODY_LABEL"
+                    description="MOD_CRUMB_FIELD_SERVICE_BODY_DESC"
+                    hint="42 or 42,57,103"
+                    filter="string"
+                    default=""
+                />
+                <field
+                    name="view"
+                    type="list"
+                    label="MOD_CRUMB_FIELD_VIEW_LABEL"
+                    description="MOD_CRUMB_FIELD_VIEW_DESC"
+                    default=""
+                >
+                    <option value="">MOD_CRUMB_FIELD_VIEW_DEFAULT</option>
+                    <option value="list">MOD_CRUMB_FIELD_VIEW_LIST</option>
+                    <option value="map">MOD_CRUMB_FIELD_VIEW_MAP</option>
+                </field>
+                <field
+                    name="css_template"
+                    type="list"
+                    label="MOD_CRUMB_FIELD_CSS_TEMPLATE_LABEL"
+                    description="MOD_CRUMB_FIELD_CSS_TEMPLATE_DESC"
+                    default=""
+                >
+                    <option value="">MOD_CRUMB_FIELD_CSS_TEMPLATE_NONE</option>
+                    <option value="full_width">MOD_CRUMB_FIELD_CSS_TEMPLATE_FW</option>
+                    <option value="full_width_force">MOD_CRUMB_FIELD_CSS_TEMPLATE_FW_FORCE</option>
+                </field>
+                <field
+                    name="base_path"
+                    type="text"
+                    label="MOD_CRUMB_FIELD_BASE_PATH_LABEL"
+                    description="MOD_CRUMB_FIELD_BASE_PATH_DESC"
+                    hint="meetings"
+                    filter="string"
+                    default=""
+                />
+            </fieldset>
+            <fieldset name="advanced">
+                <field
+                    name="widget_config"
+                    type="textarea"
+                    label="MOD_CRUMB_FIELD_WIDGET_CONFIG_LABEL"
+                    description="MOD_CRUMB_FIELD_WIDGET_CONFIG_DESC"
+                    rows="12"
+                    cols="60"
+                    filter="raw"
+                    default=""
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

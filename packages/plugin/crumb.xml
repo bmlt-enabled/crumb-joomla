@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="content" method="upgrade">
+    <name>plg_content_crumb</name>
+    <author>bmlt-enabled</author>
+    <creationDate>2026-04-29</creationDate>
+    <copyright>Copyright (C) 2026 bmlt-enabled. All rights reserved.</copyright>
+    <license>GPL v2 or later</license>
+    <authorEmail>bmlt-enabled@googlegroups.com</authorEmail>
+    <authorUrl>https://github.com/bmlt-enabled/crumb-joomla</authorUrl>
+    <version>0.1.0</version>
+    <description>PLG_CONTENT_CRUMB_XML_DESCRIPTION</description>
+    <namespace path="src">BmltEnabled\Plugin\Content\Crumb</namespace>
+
+    <files>
+        <folder plugin="crumb">services</folder>
+        <folder>src</folder>
+    </files>
+
+    <languages>
+        <language tag="en-GB">language/en-GB/plg_content_crumb.ini</language>
+        <language tag="en-GB">language/en-GB/plg_content_crumb.sys.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="server"
+                    type="url"
+                    label="PLG_CONTENT_CRUMB_FIELD_SERVER_LABEL"
+                    description="PLG_CONTENT_CRUMB_FIELD_SERVER_DESC"
+                    hint="https://your-server/main_server"
+                    filter="url"
+                    required="true"
+                />
+                <field
+                    name="service_body"
+                    type="text"
+                    label="PLG_CONTENT_CRUMB_FIELD_SERVICE_BODY_LABEL"
+                    description="PLG_CONTENT_CRUMB_FIELD_SERVICE_BODY_DESC"
+                    hint="42 or 42,57,103"
+                    filter="string"
+                    default=""
+                />
+                <field
+                    name="view"
+                    type="list"
+                    label="PLG_CONTENT_CRUMB_FIELD_VIEW_LABEL"
+                    description="PLG_CONTENT_CRUMB_FIELD_VIEW_DESC"
+                    default=""
+                >
+                    <option value="">PLG_CONTENT_CRUMB_FIELD_VIEW_DEFAULT</option>
+                    <option value="list">PLG_CONTENT_CRUMB_FIELD_VIEW_LIST</option>
+                    <option value="map">PLG_CONTENT_CRUMB_FIELD_VIEW_MAP</option>
+                </field>
+                <field
+                    name="css_template"
+                    type="list"
+                    label="PLG_CONTENT_CRUMB_FIELD_CSS_TEMPLATE_LABEL"
+                    description="PLG_CONTENT_CRUMB_FIELD_CSS_TEMPLATE_DESC"
+                    default=""
+                >
+                    <option value="">PLG_CONTENT_CRUMB_FIELD_CSS_TEMPLATE_NONE</option>
+                    <option value="full_width">PLG_CONTENT_CRUMB_FIELD_CSS_TEMPLATE_FW</option>
+                    <option value="full_width_force">PLG_CONTENT_CRUMB_FIELD_CSS_TEMPLATE_FW_FORCE</option>
+                </field>
+                <field
+                    name="base_path"
+                    type="text"
+                    label="PLG_CONTENT_CRUMB_FIELD_BASE_PATH_LABEL"
+                    description="PLG_CONTENT_CRUMB_FIELD_BASE_PATH_DESC"
+                    hint="meetings"
+                    filter="string"
+                    default=""
+                />
+            </fieldset>
+            <fieldset name="advanced">
+                <field
+                    name="widget_config"
+                    type="textarea"
+                    label="PLG_CONTENT_CRUMB_FIELD_WIDGET_CONFIG_LABEL"
+                    description="PLG_CONTENT_CRUMB_FIELD_WIDGET_CONFIG_DESC"
+                    rows="12"
+                    cols="60"
+                    filter="raw"
+                    default=""
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ruleset name="crumb-joomla">
+    <description>PSR-12 with light project tweaks for the Crumb Joomla package.</description>
+
+    <file>packages</file>
+    <file>tests</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/build/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <rule ref="PSR12">
+        <!-- Joomla extension files commonly use 4-space indents and trailing
+             newlines that conflict with strict PSR-12 in a few places. Allow
+             flexibility. -->
+    </rule>
+</ruleset>
