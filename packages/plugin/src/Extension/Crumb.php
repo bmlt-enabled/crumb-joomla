@@ -73,7 +73,8 @@ final class Crumb extends CMSPlugin
         }
 
         // Match key="…", key='…', or key=bareword.
-        preg_match_all('/([a-zA-Z_][a-zA-Z0-9_-]*)\s*=\s*("([^"]*)"|\'([^\']*)\'|([^\s"\'}]+))/', $raw, $matches, PREG_SET_ORDER);
+        $pattern = '/([a-zA-Z_][a-zA-Z0-9_-]*)\s*=\s*("([^"]*)"|\'([^\']*)\'|([^\s"\'}]+))/';
+        preg_match_all($pattern, $raw, $matches, PREG_SET_ORDER);
         foreach ($matches as $m) {
             $key   = strtolower($m[1]);
             $value = $m[3] ?? $m[4] ?? $m[5] ?? '';
