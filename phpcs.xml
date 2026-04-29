@@ -14,8 +14,10 @@
     <arg value="sp"/>
 
     <rule ref="PSR12">
-        <!-- Joomla extension files commonly use 4-space indents and trailing
-             newlines that conflict with strict PSR-12 in a few places. Allow
-             flexibility. -->
+        <!-- Every Joomla extension file pairs a `\defined('_JEXEC') or die;`
+             guard (side effect) with a namespace + class declaration in the
+             same file — that's the framework convention, not a smell.
+             Joomla core itself opts out of this rule. -->
+        <exclude name="PSR1.Files.SideEffects"/>
     </rule>
 </ruleset>

@@ -94,7 +94,7 @@ make nuke         # stop and wipe volumes (fresh DB next start)
 - Target the `main` branch.
 - Run `make lint` and `make test` before pushing.
 - New features should include unit tests where the rendering / parsing logic is exercised.
-- Joomla manifest files (`*.xml`) are validated with `xmllint --noout` in CI; keep them well-formed.
+- Joomla manifest files (`*.xml`) must be well-formed XML — `make build` will fail noisily if a manifest is broken since the package zip cannot be assembled.
 
 ## Cross-version support
 

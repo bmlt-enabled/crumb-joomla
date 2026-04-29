@@ -29,13 +29,6 @@ jobs:
           find packages -type f -name '*.php' -print0 \
             | xargs -0 -n1 -P4 php -l
 
-      - name: XML well-formedness 📑
-        run: |
-          set -e
-          for f in pkg_crumb.xml packages/plugin/crumb.xml packages/module/mod_crumb.xml; do
-            xmllint --noout "$f"
-          done
-
   test:
     runs-on: ubuntu-24.04
     strategy:

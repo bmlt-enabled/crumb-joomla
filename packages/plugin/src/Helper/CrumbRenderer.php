@@ -59,7 +59,8 @@ final class CrumbRenderer
             $attrs['data-path'] = '/' . $basePath;
         }
         if (isset($overrides['geolocation']) && $overrides['geolocation'] !== null) {
-            $attrs['data-geolocation'] = filter_var($overrides['geolocation'], FILTER_VALIDATE_BOOLEAN) ? 'true' : 'false';
+            $geo = filter_var($overrides['geolocation'], FILTER_VALIDATE_BOOLEAN);
+            $attrs['data-geolocation'] = $geo ? 'true' : 'false';
         }
 
         $attrString = '';

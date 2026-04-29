@@ -33,7 +33,7 @@ After enabling **Content - Crumb**, drop a shortcode anywhere in an article:
 {crumb}
 ```
 
-By default the plugin reads its settings (server URL, service body IDs, etc.) from the plugin's params. Override per-shortcode:
+By default, the plugin reads its settings (server URL, service body IDs, etc.) from the plugin's params. Override per-shortcode:
 
 ```
 {crumb server="https://bmlt.example.org/main_server" service_body="42" view="map"}
@@ -49,13 +49,13 @@ Publish the **Crumb** module to any module position (sidebar, footer, etc.). Con
 
 Both the plugin and the module expose the same fields:
 
-| Field | Description |
-|---|---|
-| **BMLT Server URL** | Required. Full URL to your BMLT server (e.g. `https://your-server/main_server`). |
-| **Service Body IDs** | Optional. Single ID or comma-separated list. Empty = all meetings. Child service bodies are always included. |
-| **Default View** | `list` or `map`. Overridable per shortcode and via `?view=` query param. |
-| **CSS Template** | `Full Width` or `Full Width (Force Viewport)` for breaking out of narrow content areas. |
-| **Base Path for Pretty URLs** | e.g. `meetings` → `/meetings/monday-night-meeting-42` (History API routing). Empty = hash-based routing. |
+| Field                           | Description                                                                                                                                                           |
+|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **BMLT Server URL**             | Required. Full URL to your BMLT server (e.g. `https://your-server/main_server`).                                                                                      |
+| **Service Body IDs**            | Optional. Single ID or comma-separated list. Empty = all meetings. Child service bodies are always included.                                                          |
+| **Default View**                | `list` or `map`. Overridable per shortcode and via `?view=` query param.                                                                                              |
+| **CSS Template**                | `Full Width` or `Full Width (Force Viewport)` for breaking out of narrow content areas.                                                                               |
+| **Base Path for Pretty URLs**   | e.g. `meetings` → `/meetings/monday-night-meeting-42` (History API routing). Empty = hash-based routing.                                                              |
 | **Widget Configuration (JSON)** | Advanced. JSON for `CrumbWidgetConfig`. See the [widget docs](https://crumb.bmlt.app/) for the full schema (`darkMode`, `geolocation`, `nowOffset`, `columns`, etc.). |
 
 ## Local development
