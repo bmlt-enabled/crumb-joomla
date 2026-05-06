@@ -7,7 +7,7 @@
     <license>GPL v2 or later</license>
     <authorEmail>bmlt-enabled@googlegroups.com</authorEmail>
     <authorUrl>https://github.com/bmlt-enabled/crumb-joomla</authorUrl>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <description>PLG_CONTENT_CRUMB_XML_DESCRIPTION</description>
     <namespace path="src">BmltEnabled\Plugin\Content\Crumb</namespace>
 
@@ -39,6 +39,15 @@
                     label="PLG_CONTENT_CRUMB_FIELD_SERVICE_BODY_LABEL"
                     description="PLG_CONTENT_CRUMB_FIELD_SERVICE_BODY_DESC"
                     hint="42 or 42,57,103"
+                    filter="string"
+                    default=""
+                />
+                <field
+                    name="format_ids"
+                    type="text"
+                    label="PLG_CONTENT_CRUMB_FIELD_FORMAT_IDS_LABEL"
+                    description="PLG_CONTENT_CRUMB_FIELD_FORMAT_IDS_DESC"
+                    hint="17 or 17,54,78"
                     filter="string"
                     default=""
                 />

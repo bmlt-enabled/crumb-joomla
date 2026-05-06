@@ -44,6 +44,7 @@ final class Crumb extends CMSPlugin
         $settings = [
             'server'        => (string) $this->params->get('server', ''),
             'service_body'  => (string) $this->params->get('service_body', ''),
+            'format_ids'    => (string) $this->params->get('format_ids', ''),
             'view'          => (string) $this->params->get('view', ''),
             'css_template'  => (string) $this->params->get('css_template', ''),
             'base_path'     => (string) $this->params->get('base_path', ''),

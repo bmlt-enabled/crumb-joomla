@@ -30,6 +30,7 @@ class CrumbHelper
         return [
             'server'        => trim((string) $params->get('server', '')),
             'service_body'  => (string) $params->get('service_body', ''),
+            'format_ids'    => (string) $params->get('format_ids', ''),
             'view'          => (string) $params->get('view', ''),
             'css_template'  => (string) $params->get('css_template', ''),
             'base_path'     => (string) $params->get('base_path', ''),
@@ -52,6 +53,7 @@ class CrumbHelper
         }
 
         $serviceBody = $settings['service_body'] ?? '';
+        $formatIds   = $settings['format_ids'] ?? '';
         $viewRaw     = $settings['view'] ?? '';
         $view        = \in_array($viewRaw, self::ALLOWED_VIEWS, true) ? $viewRaw : '';
         $basePath    = trim((string) ($settings['base_path'] ?? ''), '/');
@@ -64,6 +66,9 @@ class CrumbHelper
         ];
         if ($serviceBody !== '') {
             $attrs['data-service-body'] = trim((string) $serviceBody);
+        }
+        if ($formatIds !== '') {
+            $attrs['data-format-ids'] = trim((string) $formatIds);
         }
         if ($view !== '') {
             $attrs['data-view'] = $view;
