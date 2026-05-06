@@ -28,13 +28,14 @@ class CrumbHelper
     public function getSettings(Registry $params): array
     {
         return [
-            'server'        => trim((string) $params->get('server', '')),
-            'service_body'  => (string) $params->get('service_body', ''),
-            'format_ids'    => (string) $params->get('format_ids', ''),
-            'view'          => (string) $params->get('view', ''),
-            'css_template'  => (string) $params->get('css_template', ''),
-            'base_path'     => (string) $params->get('base_path', ''),
-            'widget_config' => (string) $params->get('widget_config', ''),
+            'server'             => trim((string) $params->get('server', '')),
+            'service_body'       => (string) $params->get('service_body', ''),
+            'format_ids'         => (string) $params->get('format_ids', ''),
+            'view'               => (string) $params->get('view', ''),
+            'css_template'       => (string) $params->get('css_template', ''),
+            'base_path'          => (string) $params->get('base_path', ''),
+            'geolocation_radius' => (string) $params->get('geolocation_radius', ''),
+            'widget_config'      => (string) $params->get('widget_config', ''),
         ];
     }
 
@@ -84,14 +85,29 @@ class CrumbHelper
 
         $widget = '<div' . $attrString . '></div>';
 
-        $configScript = '';
+        // Build CrumbWidgetConfig array from widget_config JSON plus settings.
+        $configArray = [];
         if ($widgetConf !== '') {
             $decoded = json_decode($widgetConf, true);
             if (\is_array($decoded)) {
-                $configScript = '<script>window.CrumbWidgetConfig = '
-                    . json_encode($decoded, JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP)
-                    . ';</script>';
+                $configArray = $decoded;
             }
+        }
+
+        // Merge geolocation_radius admin setting if not already set in widget_config JSON.
+        $geoRadiusSetting = (string) ($settings['geolocation_radius'] ?? '');
+        if ($geoRadiusSetting !== '' && !isset($configArray['geolocationRadius'])) {
+            $radius = (int) $geoRadiusSetting;
+            if ($radius !== 0) {
+                $configArray['geolocationRadius'] = $radius;
+            }
+        }
+
+        $configScript = '';
+        if (!empty($configArray)) {
+            $configScript = '<script>window.CrumbWidgetConfig = '
+                . json_encode($configArray, JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP)
+                . ';</script>';
         }
 
         $loader = '<script src="https://cdn.aws.bmlt.app/crumb-widget.js" defer></script>';

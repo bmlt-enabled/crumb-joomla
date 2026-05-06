@@ -74,15 +74,38 @@ final class CrumbRenderer
 
         $widget = '<div' . $attrString . '></div>';
 
-        // Inline config script: only emit if the JSON is valid.
-        $configScript = '';
+        // Build CrumbWidgetConfig array from widget_config JSON plus settings/overrides.
+        $configArray = [];
         if ($widgetConf !== '') {
             $decoded = json_decode($widgetConf, true);
             if (\is_array($decoded)) {
-                $configScript = '<script>window.CrumbWidgetConfig = '
-                    . json_encode($decoded, JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP)
-                    . ';</script>';
+                $configArray = $decoded;
             }
+        }
+
+        // Merge geolocation_radius admin setting if not already set in widget_config JSON.
+        $geoRadiusSetting = (string) ($settings['geolocation_radius'] ?? '');
+        if ($geoRadiusSetting !== '' && !isset($configArray['geolocationRadius'])) {
+            $radius = (int) $geoRadiusSetting;
+            if ($radius !== 0) {
+                $configArray['geolocationRadius'] = $radius;
+            }
+        }
+
+        // Per-shortcode override takes precedence.
+        $geoRadiusOverride = isset($overrides['geolocation_radius']) ? (string) $overrides['geolocation_radius'] : null;
+        if ($geoRadiusOverride !== null && $geoRadiusOverride !== '') {
+            $radius = (int) $geoRadiusOverride;
+            if ($radius !== 0) {
+                $configArray['geolocationRadius'] = $radius;
+            }
+        }
+
+        $configScript = '';
+        if (!empty($configArray)) {
+            $configScript = '<script>window.CrumbWidgetConfig = '
+                . json_encode($configArray, JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP)
+                . ';</script>';
         }
 
         // Loader script (CDN). Pinned to a major-minor channel so cache stays warm

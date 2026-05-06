@@ -137,4 +137,61 @@ final class CrumbRendererTest extends TestCase
         ]);
         $this->assertStringNotContainsString('<script>alert(1)</script>', $output);
     }
+
+    public function testGeolocationRadiusSettingMergesAsInteger(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'             => 'https://x/main_server',
+            'geolocation_radius' => '-50',
+        ]);
+        $this->assertStringContainsString('window.CrumbWidgetConfig', $output);
+        $this->assertStringContainsString('"geolocationRadius":-50', $output);
+    }
+
+    public function testGeolocationRadiusSettingPreservesIntegerType(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'             => 'https://x/main_server',
+            'geolocation_radius' => '25',
+        ]);
+        preg_match('/window\.CrumbWidgetConfig\s*=\s*(\{.*?\});/', $output, $m);
+        $config = json_decode($m[1], true);
+        $this->assertSame(25, $config['geolocationRadius'], 'geolocationRadius must be an integer, not a string.');
+    }
+
+    public function testGeolocationRadiusOverrideTakesPrecedenceOverSetting(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'geolocation_radius' => '-50'],
+            ['geolocation_radius' => '30']
+        );
+        $this->assertStringContainsString('"geolocationRadius":30', $output);
+        $this->assertStringNotContainsString('"geolocationRadius":-50', $output);
+    }
+
+    public function testWidgetConfigGeolocationRadiusTakesPrecedenceOverSetting(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'             => 'https://x/main_server',
+            'geolocation_radius' => '-50',
+            'widget_config'      => '{"geolocationRadius":10}',
+        ]);
+        $this->assertStringContainsString('"geolocationRadius":10', $output);
+        $this->assertStringNotContainsString('"geolocationRadius":-50', $output);
+    }
+
+    public function testZeroGeolocationRadiusIsIgnored(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'             => 'https://x/main_server',
+            'geolocation_radius' => '0',
+        ]);
+        $this->assertStringNotContainsString('CrumbWidgetConfig', $output);
+    }
+
+    public function testEmptyGeolocationRadiusProducesNoConfigScript(): void
+    {
+        $output = CrumbRenderer::render(['server' => 'https://x/main_server']);
+        $this->assertStringNotContainsString('CrumbWidgetConfig', $output);
+    }
 }

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## 0.3.0 (May 6, 2026)
+
+### Added
+- **Geolocation Radius** setting on both the content plugin and site module — dedicated field for geolocation search radius. Positive integer = fixed radius in miles (or km per server settings). Negative integer = BMLT auto-radius (e.g. `-50` finds ~50 nearby meetings).
+- `geolocation_radius` shortcode attribute on the content plugin to override the radius per article (`{crumb geolocation_radius="-50"}`).
+
 ## 0.2.0 (May 5, 2026)
 
 ### Added
