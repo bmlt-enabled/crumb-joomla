@@ -7,7 +7,7 @@
     <license>GPL v2 or later</license>
     <authorEmail>bmlt-enabled@googlegroups.com</authorEmail>
     <authorUrl>https://github.com/bmlt-enabled/crumb-joomla</authorUrl>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <description>MOD_CRUMB_XML_DESCRIPTION</description>
     <namespace path="src">BmltEnabled\Module\Crumb\Site</namespace>
 
@@ -74,6 +74,15 @@
                     <option value="full_width">MOD_CRUMB_FIELD_CSS_TEMPLATE_FW</option>
                     <option value="full_width_force">MOD_CRUMB_FIELD_CSS_TEMPLATE_FW_FORCE</option>
                 </field>
+                <field
+                    name="geolocation_radius"
+                    type="text"
+                    label="MOD_CRUMB_FIELD_GEOLOCATION_RADIUS_LABEL"
+                    description="MOD_CRUMB_FIELD_GEOLOCATION_RADIUS_DESC"
+                    hint="-50"
+                    filter="string"
+                    default=""
+                />
                 <field
                     name="base_path"
                     type="text"
