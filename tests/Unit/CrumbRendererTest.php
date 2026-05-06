@@ -39,6 +39,40 @@ final class CrumbRendererTest extends TestCase
         $this->assertStringContainsString('data-service-body="42,57"', $output);
     }
 
+    public function testFormatIdsAttributeEmittedFromSettings(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'     => 'https://x/main_server',
+            'format_ids' => '17,54',
+        ]);
+        $this->assertStringContainsString('data-format-ids="17,54"', $output);
+    }
+
+    public function testFormatIdsAttributeOmittedWhenEmpty(): void
+    {
+        $output = CrumbRenderer::render(['server' => 'https://x/main_server']);
+        $this->assertStringNotContainsString('data-format-ids', $output);
+    }
+
+    public function testFormatIdsOverrideBeatsSavedSetting(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'format_ids' => '99'],
+            ['format_ids' => '17']
+        );
+        $this->assertStringContainsString('data-format-ids="17"', $output);
+        $this->assertStringNotContainsString('data-format-ids="99"', $output);
+    }
+
+    public function testEmptyFormatIdsOverrideOmitsAttribute(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'format_ids' => '99'],
+            ['format_ids' => '']
+        );
+        $this->assertStringNotContainsString('data-format-ids', $output);
+    }
+
     public function testInvalidViewIsDroppedNotPassedThrough(): void
     {
         $output = CrumbRenderer::render([

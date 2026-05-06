@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## 0.2.0 (May 5, 2026)
+
+### Added
+- **Format IDs** field on the content plugin and site module — single ID or comma-separated list of BMLT format IDs to lock the widget to. Can be overridden per shortcode via `format_ids="17,54"`.
+
 ## 0.1.0 (April 29, 2026)
 
 Initial release. Embed the [Crumb](https://crumb.bmlt.app/) BMLT meeting-finder widget in Joomla 4, 5, or 6 sites.
