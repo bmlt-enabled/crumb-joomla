@@ -44,6 +44,7 @@ final class CrumbRenderer
         $view        = \in_array($viewRaw, self::ALLOWED_VIEWS, true) ? $viewRaw : '';
         $basePath    = trim((string) ($settings['base_path'] ?? ''), '/');
         $template    = (string) ($settings['css_template'] ?? '');
+        $updateUrl   = trim((string) ($overrides['update_url'] ?? $settings['update_url'] ?? ''));
         $widgetConf  = trim((string) ($settings['widget_config'] ?? ''));
 
         $attrs = [
@@ -61,6 +62,9 @@ final class CrumbRenderer
         }
         if ($basePath !== '') {
             $attrs['data-path'] = '/' . $basePath;
+        }
+        if ($updateUrl !== '') {
+            $attrs['data-update-url'] = $updateUrl;
         }
         if (isset($overrides['geolocation']) && $overrides['geolocation'] !== null) {
             $geo = filter_var($overrides['geolocation'], FILTER_VALIDATE_BOOLEAN);

@@ -35,6 +35,7 @@ class CrumbHelper
             'css_template'       => (string) $params->get('css_template', ''),
             'base_path'          => (string) $params->get('base_path', ''),
             'geolocation_radius' => (string) $params->get('geolocation_radius', ''),
+            'update_url'         => (string) $params->get('update_url', ''),
             'widget_config'      => (string) $params->get('widget_config', ''),
         ];
     }
@@ -59,6 +60,7 @@ class CrumbHelper
         $view        = \in_array($viewRaw, self::ALLOWED_VIEWS, true) ? $viewRaw : '';
         $basePath    = trim((string) ($settings['base_path'] ?? ''), '/');
         $template    = (string) ($settings['css_template'] ?? '');
+        $updateUrl   = trim((string) ($settings['update_url'] ?? ''));
         $widgetConf  = trim((string) ($settings['widget_config'] ?? ''));
 
         $attrs = [
@@ -76,6 +78,9 @@ class CrumbHelper
         }
         if ($basePath !== '') {
             $attrs['data-path'] = '/' . $basePath;
+        }
+        if ($updateUrl !== '') {
+            $attrs['data-update-url'] = $updateUrl;
         }
 
         $attrString = '';
