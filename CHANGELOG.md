@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## 0.4.0 (May 10, 2026)
+
+### Added
+- **Update Meeting URL** setting on both the content plugin and site module, plus matching `update_url` shortcode override (`{crumb update_url="…"}`). Powers the "Update Meeting Info" link on the meeting detail panel. Supports tokens `{meeting_id}`, `{meeting_name}`, `{server_url}`, and `{return_url}` (URL-encoded on substitution). Works with [bmlt-workflow](https://github.com/bmlt-enabled/bmlt-workflow), arbitrary hosted forms, or `mailto:` URLs. Leave empty to hide the link.
+
 ## 0.3.0 (May 6, 2026)
 
 ### Added

@@ -39,7 +39,7 @@ By default, the plugin reads its settings (server URL, service body IDs, etc.) f
 {crumb server="https://bmlt.example.org/main_server" service_body="42" view="map"}
 ```
 
-Recognised shortcode args: `server`, `service_body`, `view` (`list`/`map`), `geolocation` (`true`/`false`).
+Recognised shortcode args: `server`, `service_body`, `format_ids`, `view` (`list`/`map`), `geolocation` (`true`/`false`), `geolocation_radius`, `update_url`.
 
 ### In a module position (module)
 
@@ -56,6 +56,7 @@ Both the plugin and the module expose the same fields:
 | **Default View**                | `list` or `map`. Overridable per shortcode and via `?view=` query param.                                                                                              |
 | **CSS Template**                | `Full Width` or `Full Width (Force Viewport)` for breaking out of narrow content areas.                                                                               |
 | **Base Path for Pretty URLs**   | e.g. `meetings` → `/meetings/monday-night-meeting-42` (History API routing). Empty = hash-based routing.                                                              |
+| **Update Meeting URL**          | Optional. URL template for the "Update Meeting Info" link on the meeting detail panel. Tokens: `{meeting_id}`, `{meeting_name}`, `{server_url}`, `{return_url}`. Works with bmlt-workflow, hosted forms, or `mailto:` URLs. |
 | **Widget Configuration (JSON)** | Advanced. JSON for `CrumbWidgetConfig`. See the [widget docs](https://crumb.bmlt.app/) for the full schema (`darkMode`, `geolocation`, `nowOffset`, `columns`, etc.). |
 
 ## Local development

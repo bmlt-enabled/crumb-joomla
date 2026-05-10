@@ -194,4 +194,62 @@ final class CrumbRendererTest extends TestCase
         $output = CrumbRenderer::render(['server' => 'https://x/main_server']);
         $this->assertStringNotContainsString('CrumbWidgetConfig', $output);
     }
+
+    public function testUpdateUrlSettingEmitsDataAttribute(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'     => 'https://x/main_server',
+            'update_url' => 'https://example.org/form/?meeting_id={meeting_id}',
+        ]);
+        $this->assertStringContainsString(
+            'data-update-url="https://example.org/form/?meeting_id={meeting_id}"',
+            $output
+        );
+    }
+
+    public function testUpdateUrlMailtoIsEmitted(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'     => 'https://x/main_server',
+            'update_url' => 'mailto:web@example.org?subject=Update%20{meeting_name}',
+        ]);
+        $this->assertStringContainsString(
+            'data-update-url="mailto:web@example.org?subject=Update%20{meeting_name}"',
+            $output
+        );
+    }
+
+    public function testEmptyUpdateUrlOmitsAttribute(): void
+    {
+        $output = CrumbRenderer::render(['server' => 'https://x/main_server']);
+        $this->assertStringNotContainsString('data-update-url', $output);
+    }
+
+    public function testUpdateUrlOverrideBeatsSavedSetting(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'update_url' => 'https://saved/?meeting_id={meeting_id}'],
+            ['update_url' => 'https://override/?meeting_id={meeting_id}']
+        );
+        $this->assertStringContainsString('data-update-url="https://override/?meeting_id={meeting_id}"', $output);
+        $this->assertStringNotContainsString('saved', $output);
+    }
+
+    public function testEmptyUpdateUrlOverrideOmitsAttribute(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'update_url' => 'https://saved/?meeting_id={meeting_id}'],
+            ['update_url' => '']
+        );
+        $this->assertStringNotContainsString('data-update-url', $output);
+    }
+
+    public function testUpdateUrlIsHtmlEscaped(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'     => 'https://x/main_server',
+            'update_url' => '"><script>alert(1)</script>',
+        ]);
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $output);
+    }
 }
