@@ -45,6 +45,7 @@ final class CrumbRenderer
         $basePath    = trim((string) ($settings['base_path'] ?? ''), '/');
         $template    = (string) ($settings['css_template'] ?? '');
         $updateUrl   = trim((string) ($overrides['update_url'] ?? $settings['update_url'] ?? ''));
+        $columns     = trim((string) ($overrides['columns'] ?? $settings['columns'] ?? ''));
         $widgetConf  = trim((string) ($settings['widget_config'] ?? ''));
 
         $attrs = [
@@ -65,6 +66,9 @@ final class CrumbRenderer
         }
         if ($updateUrl !== '') {
             $attrs['data-update-url'] = $updateUrl;
+        }
+        if ($columns !== '') {
+            $attrs['data-columns'] = $columns;
         }
         if (isset($overrides['geolocation']) && $overrides['geolocation'] !== null) {
             $geo = filter_var($overrides['geolocation'], FILTER_VALIDATE_BOOLEAN);

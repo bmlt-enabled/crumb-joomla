@@ -36,6 +36,7 @@ class CrumbHelper
             'base_path'          => (string) $params->get('base_path', ''),
             'geolocation_radius' => (string) $params->get('geolocation_radius', ''),
             'update_url'         => (string) $params->get('update_url', ''),
+            'columns'            => (string) $params->get('columns', ''),
             'widget_config'      => (string) $params->get('widget_config', ''),
         ];
     }
@@ -61,6 +62,7 @@ class CrumbHelper
         $basePath    = trim((string) ($settings['base_path'] ?? ''), '/');
         $template    = (string) ($settings['css_template'] ?? '');
         $updateUrl   = trim((string) ($settings['update_url'] ?? ''));
+        $columns     = trim((string) ($settings['columns'] ?? ''));
         $widgetConf  = trim((string) ($settings['widget_config'] ?? ''));
 
         $attrs = [
@@ -81,6 +83,9 @@ class CrumbHelper
         }
         if ($updateUrl !== '') {
             $attrs['data-update-url'] = $updateUrl;
+        }
+        if ($columns !== '') {
+            $attrs['data-columns'] = $columns;
         }
 
         $attrString = '';
