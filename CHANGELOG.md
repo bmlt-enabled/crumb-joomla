@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## 0.5.0 (May 11, 2026)
+
+### Added
+- **Columns** field on the content plugin and site module — comma-separated list of columns to show in list view (e.g. `time,name,location,address,service_body`). Omit a name to hide that column. Can be overridden per shortcode on the content plugin via `columns="…"`.
+
 ## 0.4.0 (May 10, 2026)
 
 ### Added

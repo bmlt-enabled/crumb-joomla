@@ -50,6 +50,7 @@ final class Crumb extends CMSPlugin
             'base_path'          => (string) $this->params->get('base_path', ''),
             'geolocation_radius' => (string) $this->params->get('geolocation_radius', ''),
             'update_url'         => (string) $this->params->get('update_url', ''),
+            'columns'            => (string) $this->params->get('columns', ''),
             'widget_config'      => (string) $this->params->get('widget_config', ''),
         ];
 

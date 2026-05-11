@@ -73,6 +73,49 @@ final class CrumbRendererTest extends TestCase
         $this->assertStringNotContainsString('data-format-ids', $output);
     }
 
+    public function testColumnsAttributeEmittedFromSettings(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'  => 'https://x/main_server',
+            'columns' => 'time,name,location,address,service_body',
+        ]);
+        $this->assertStringContainsString('data-columns="time,name,location,address,service_body"', $output);
+    }
+
+    public function testColumnsAttributeOmittedWhenEmpty(): void
+    {
+        $output = CrumbRenderer::render(['server' => 'https://x/main_server']);
+        $this->assertStringNotContainsString('data-columns', $output);
+    }
+
+    public function testColumnsOverrideBeatsSavedSetting(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'columns' => 'time,name'],
+            ['columns' => 'name,location']
+        );
+        $this->assertStringContainsString('data-columns="name,location"', $output);
+        $this->assertStringNotContainsString('data-columns="time,name"', $output);
+    }
+
+    public function testColumnsOverrideTrimmed(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server'],
+            ['columns' => '  time,name  ']
+        );
+        $this->assertStringContainsString('data-columns="time,name"', $output);
+    }
+
+    public function testEmptyColumnsOverrideOmitsAttribute(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'columns' => 'time,name'],
+            ['columns' => '']
+        );
+        $this->assertStringNotContainsString('data-columns', $output);
+    }
+
     public function testInvalidViewIsDroppedNotPassedThrough(): void
     {
         $output = CrumbRenderer::render([
