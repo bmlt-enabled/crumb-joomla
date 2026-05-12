@@ -132,6 +132,15 @@
                     filter="string"
                     default=""
                 />
+                <field
+                    name="query"
+                    type="text"
+                    label="MOD_CRUMB_FIELD_QUERY_LABEL"
+                    description="MOD_CRUMB_FIELD_QUERY_DESC"
+                    hint="meeting_key=location_nation&amp;meeting_key_value[]=USA"
+                    filter="raw"
+                    default=""
+                />
             </fieldset>
             <fieldset name="advanced">
                 <field

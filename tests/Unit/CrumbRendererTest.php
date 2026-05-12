@@ -116,6 +116,44 @@ final class CrumbRendererTest extends TestCase
         $this->assertStringNotContainsString('data-columns', $output);
     }
 
+    public function testQueryAttributeEmittedFromOverride(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server'],
+            ['query' => 'meeting_key=location_nation&meeting_key_value[]=USA']
+        );
+        // htmlspecialchars escapes & → &amp;; [ ] pass through (Joomla's {…} shortcode
+        // closer doesn't conflict with brackets, unlike WordPress / Drupal).
+        $this->assertStringContainsString(
+            'data-query="meeting_key=location_nation&amp;meeting_key_value[]=USA"',
+            $output
+        );
+    }
+
+    public function testQueryOverrideTrimmed(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server'],
+            ['query' => '  weekdays=2  ']
+        );
+        $this->assertStringContainsString('data-query="weekdays=2"', $output);
+    }
+
+    public function testEmptyQueryOverrideOmitsAttribute(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server'],
+            ['query' => '']
+        );
+        $this->assertStringNotContainsString('data-query', $output);
+    }
+
+    public function testNoQueryOmitsAttribute(): void
+    {
+        $output = CrumbRenderer::render(['server' => 'https://x/main_server']);
+        $this->assertStringNotContainsString('data-query', $output);
+    }
+
     public function testInvalidViewIsDroppedNotPassedThrough(): void
     {
         $output = CrumbRenderer::render([

@@ -49,6 +49,9 @@ final class CrumbRenderer
         $template    = (string) ($settings['css_template'] ?? '');
         $updateUrl   = trim((string) ($overrides['update_url'] ?? $settings['update_url'] ?? ''));
         $columns     = trim((string) ($overrides['columns'] ?? $settings['columns'] ?? ''));
+        // Raw BMLT query — per-instance only (shortcode arg or module param). When set, the widget
+        // routes through rawQuery(), disables geolocation, and ignores service_body/format_ids.
+        $query       = trim((string) ($overrides['query'] ?? $settings['query'] ?? ''));
         $widgetConf  = trim((string) ($settings['widget_config'] ?? ''));
 
         $attrs = [
@@ -72,6 +75,9 @@ final class CrumbRenderer
         }
         if ($columns !== '') {
             $attrs['data-columns'] = $columns;
+        }
+        if ($query !== '') {
+            $attrs['data-query'] = $query;
         }
         if (isset($overrides['geolocation']) && $overrides['geolocation'] !== null) {
             $geo = filter_var($overrides['geolocation'], FILTER_VALIDATE_BOOLEAN);

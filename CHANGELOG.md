@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## 0.7.0 (May 12, 2026)
+
+### Added
+- **Raw BMLT query** — new `query` shortcode argument on the content plugin (`{crumb query="…"}`) and matching **Raw BMLT Query** field on the site module. Passes through to the Crumb widget's `data-query`, which routes through `bmlt-query-client`'s `rawQuery()` for filters the structured options can't express (e.g. multi-value `meeting_key_value[]`). When set, it replaces the default load entirely — Service Body and Format IDs are ignored — and forces geolocation off. Per-instance only; no global plugin setting. Joomla's `{…}` shortcode closer doesn't conflict with `[`/`]`, so brackets can be used verbatim in shortcode args. Requires Crumb Widget 1.5.0+.
+
 ## 0.6.0 (May 11, 2026)
 
 ### Added
