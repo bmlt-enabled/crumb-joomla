@@ -24,6 +24,9 @@ final class CrumbRenderer
 {
     public const ALLOWED_VIEWS = ['list', 'map'];
 
+    /** Languages the widget supports (mirrors src/stores/localization.ts). */
+    public const SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'de', 'pt', 'it', 'sv', 'da', 'el', 'fa', 'pl', 'ru', 'ja'];
+
     /**
      * Build the widget markup. Returns an empty string when no server is
      * configured, plus a visible error notice for editors.
@@ -106,6 +109,19 @@ final class CrumbRenderer
             $radius = (int) $geoRadiusOverride;
             if ($radius !== 0) {
                 $configArray['geolocationRadius'] = $radius;
+            }
+        }
+
+        // Language: per-shortcode override wins; else the saved plugin/module param
+        // fills in unless widget_config JSON already set one. Unsupported codes
+        // are silently dropped (widget then auto-detects from navigator.language).
+        $langOverride = isset($overrides['language']) ? strtolower(trim((string) $overrides['language'])) : '';
+        if ($langOverride !== '' && \in_array($langOverride, self::SUPPORTED_LANGUAGES, true)) {
+            $configArray['language'] = $langOverride;
+        } elseif (!isset($configArray['language'])) {
+            $langSetting = strtolower(trim((string) ($settings['language'] ?? '')));
+            if ($langSetting !== '' && \in_array($langSetting, self::SUPPORTED_LANGUAGES, true)) {
+                $configArray['language'] = $langSetting;
             }
         }
 

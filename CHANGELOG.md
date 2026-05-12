@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## 0.6.0 (May 11, 2026)
+
+### Added
+- **Language** field on the content plugin and site module — forces the widget UI language for the rendered widget. Leave empty to auto-detect from the visitor's browser. Supported codes: `en`, `es`, `fr`, `de`, `pt`, `it`, `sv`, `da`, `el`, `fa`, `pl`, `ru`, `ja`. Per-shortcode override on the content plugin via `language="…"`. `widget_config` JSON `language` key still wins over both. Unsupported codes are silently dropped.
+
 ## 0.5.0 (May 11, 2026)
 
 ### Added

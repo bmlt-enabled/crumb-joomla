@@ -22,6 +22,9 @@ class CrumbHelper
 {
     public const ALLOWED_VIEWS = ['list', 'map'];
 
+    /** Languages the widget supports (mirrors src/stores/localization.ts). */
+    public const SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'de', 'pt', 'it', 'sv', 'da', 'el', 'fa', 'pl', 'ru', 'ja'];
+
     /**
      * @return array<string,string>
      */
@@ -32,6 +35,7 @@ class CrumbHelper
             'service_body'       => (string) $params->get('service_body', ''),
             'format_ids'         => (string) $params->get('format_ids', ''),
             'view'               => (string) $params->get('view', ''),
+            'language'           => (string) $params->get('language', ''),
             'css_template'       => (string) $params->get('css_template', ''),
             'base_path'          => (string) $params->get('base_path', ''),
             'geolocation_radius' => (string) $params->get('geolocation_radius', ''),
@@ -110,6 +114,15 @@ class CrumbHelper
             $radius = (int) $geoRadiusSetting;
             if ($radius !== 0) {
                 $configArray['geolocationRadius'] = $radius;
+            }
+        }
+
+        // Language: saved module param fills in if widget_config JSON didn't set one.
+        // Unsupported codes are silently dropped (widget auto-detects from navigator.language).
+        if (!isset($configArray['language'])) {
+            $langSetting = strtolower(trim((string) ($settings['language'] ?? '')));
+            if ($langSetting !== '' && \in_array($langSetting, self::SUPPORTED_LANGUAGES, true)) {
+                $configArray['language'] = $langSetting;
             }
         }
 
