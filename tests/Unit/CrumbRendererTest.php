@@ -238,6 +238,64 @@ final class CrumbRendererTest extends TestCase
         $this->assertStringNotContainsString('CrumbWidgetConfig', $output);
     }
 
+    public function testLanguageSettingMergesIntoConfig(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'   => 'https://x/main_server',
+            'language' => 'es',
+        ]);
+        $this->assertStringContainsString('window.CrumbWidgetConfig', $output);
+        $this->assertStringContainsString('"language":"es"', $output);
+    }
+
+    public function testLanguageOverrideTakesPrecedenceOverSetting(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'language' => 'es'],
+            ['language' => 'de']
+        );
+        $this->assertStringContainsString('"language":"de"', $output);
+        $this->assertStringNotContainsString('"language":"es"', $output);
+    }
+
+    public function testLanguageOverrideDroppedForUnsupportedCode(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'language' => 'es'],
+            ['language' => 'banana']
+        );
+        // Saved 'es' fills in because the unsupported override never wrote a value.
+        $this->assertStringContainsString('"language":"es"', $output);
+    }
+
+    public function testWidgetConfigLanguageTakesPrecedenceOverSetting(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'        => 'https://x/main_server',
+            'language'      => 'es',
+            'widget_config' => '{"language":"fr"}',
+        ]);
+        $this->assertStringContainsString('"language":"fr"', $output);
+    }
+
+    public function testEmptyLanguageProducesNoConfigScript(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'   => 'https://x/main_server',
+            'language' => '',
+        ]);
+        $this->assertStringNotContainsString('CrumbWidgetConfig', $output);
+    }
+
+    public function testLanguageOverrideTrimsAndLowercases(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server'],
+            ['language' => '  FR  ']
+        );
+        $this->assertStringContainsString('"language":"fr"', $output);
+    }
+
     public function testUpdateUrlSettingEmitsDataAttribute(): void
     {
         $output = CrumbRenderer::render([

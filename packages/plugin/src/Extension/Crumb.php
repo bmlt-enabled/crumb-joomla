@@ -46,6 +46,7 @@ final class Crumb extends CMSPlugin
             'service_body'       => (string) $this->params->get('service_body', ''),
             'format_ids'         => (string) $this->params->get('format_ids', ''),
             'view'               => (string) $this->params->get('view', ''),
+            'language'           => (string) $this->params->get('language', ''),
             'css_template'       => (string) $this->params->get('css_template', ''),
             'base_path'          => (string) $this->params->get('base_path', ''),
             'geolocation_radius' => (string) $this->params->get('geolocation_radius', ''),
