@@ -100,6 +100,14 @@ final class CrumbRenderer
             }
         }
 
+        // Merge geolocation admin setting if not already set in widget_config JSON.
+        // Per-shortcode geolocation arg is handled above via data-geolocation, which the
+        // widget reads after CrumbWidgetConfig — so that override still wins.
+        $geoSetting = (string) ($settings['geolocation'] ?? '');
+        if ($geoSetting !== '' && !isset($configArray['geolocation'])) {
+            $configArray['geolocation'] = ($geoSetting === '1');
+        }
+
         // Merge geolocation_radius admin setting if not already set in widget_config JSON.
         $geoRadiusSetting = (string) ($settings['geolocation_radius'] ?? '');
         if ($geoRadiusSetting !== '' && !isset($configArray['geolocationRadius'])) {

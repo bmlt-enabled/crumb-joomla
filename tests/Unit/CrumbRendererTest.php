@@ -276,6 +276,56 @@ final class CrumbRendererTest extends TestCase
         $this->assertStringNotContainsString('CrumbWidgetConfig', $output);
     }
 
+    public function testGeolocationSettingOnMergesIntoConfig(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'      => 'https://x/main_server',
+            'geolocation' => '1',
+        ]);
+        $this->assertStringContainsString('window.CrumbWidgetConfig', $output);
+        $this->assertStringContainsString('"geolocation":true', $output);
+    }
+
+    public function testGeolocationSettingOffMergesIntoConfig(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'      => 'https://x/main_server',
+            'geolocation' => '0',
+        ]);
+        $this->assertStringContainsString('"geolocation":false', $output);
+    }
+
+    public function testEmptyGeolocationSettingProducesNoConfigScript(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'      => 'https://x/main_server',
+            'geolocation' => '',
+        ]);
+        $this->assertStringNotContainsString('CrumbWidgetConfig', $output);
+    }
+
+    public function testWidgetConfigGeolocationTakesPrecedenceOverSetting(): void
+    {
+        $output = CrumbRenderer::render([
+            'server'        => 'https://x/main_server',
+            'geolocation'   => '0',
+            'widget_config' => '{"geolocation":true}',
+        ]);
+        $this->assertStringContainsString('"geolocation":true', $output);
+        $this->assertStringNotContainsString('"geolocation":false', $output);
+    }
+
+    public function testShortcodeGeolocationOverrideEmitsDataAttribute(): void
+    {
+        // Per-shortcode geolocation override is emitted as data-geolocation, which the
+        // widget reads after CrumbWidgetConfig — so it overrides the admin setting.
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'geolocation' => '0'],
+            ['geolocation' => 'true']
+        );
+        $this->assertStringContainsString('data-geolocation="true"', $output);
+    }
+
     public function testLanguageSettingMergesIntoConfig(): void
     {
         $output = CrumbRenderer::render([

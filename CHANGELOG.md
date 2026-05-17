@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## 0.8.0 (May 17, 2026)
+
+### Added
+- **Geolocation** field on the content plugin and site module — dropdown (Widget Default / On / Off) to enable or disable location-based search (the Near Me button and typed-location search). On the content plugin, can be overridden per shortcode via `geolocation="true"` / `geolocation="false"` (already supported). `widget_config` JSON `geolocation` key still wins over the admin setting.
+
 ## 0.7.0 (May 12, 2026)
 
 ### Added

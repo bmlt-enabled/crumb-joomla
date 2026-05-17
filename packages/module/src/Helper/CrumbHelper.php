@@ -38,6 +38,7 @@ class CrumbHelper
             'language'           => (string) $params->get('language', ''),
             'css_template'       => (string) $params->get('css_template', ''),
             'base_path'          => (string) $params->get('base_path', ''),
+            'geolocation'        => (string) $params->get('geolocation', ''),
             'geolocation_radius' => (string) $params->get('geolocation_radius', ''),
             'update_url'         => (string) $params->get('update_url', ''),
             'columns'            => (string) $params->get('columns', ''),
@@ -111,6 +112,12 @@ class CrumbHelper
             if (\is_array($decoded)) {
                 $configArray = $decoded;
             }
+        }
+
+        // Merge geolocation admin setting if not already set in widget_config JSON.
+        $geoSetting = (string) ($settings['geolocation'] ?? '');
+        if ($geoSetting !== '' && !isset($configArray['geolocation'])) {
+            $configArray['geolocation'] = ($geoSetting === '1');
         }
 
         // Merge geolocation_radius admin setting if not already set in widget_config JSON.
