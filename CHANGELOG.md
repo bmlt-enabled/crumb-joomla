@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## 0.9.0 (October 8, 2026)
+
 ### Added
 - **Finnish** (`fi`) in the Language field on the content plugin and site module, and the `language` shortcode attribute. Requires the Crumb Widget release that ships Finnish (loaded from the CDN).
 
