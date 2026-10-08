@@ -83,6 +83,7 @@
                     <option value="pl">Polski (pl)</option>
                     <option value="ru">Русский (ru)</option>
                     <option value="ja">日本語 (ja)</option>
+                    <option value="fi">Suomi (fi)</option>
                 </field>
                 <field
                     name="css_template"

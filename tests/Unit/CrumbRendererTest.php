@@ -346,6 +346,15 @@ final class CrumbRendererTest extends TestCase
         $this->assertStringNotContainsString('"language":"es"', $output);
     }
 
+    public function testFinnishLanguageOverrideAccepted(): void
+    {
+        $output = CrumbRenderer::render(
+            ['server' => 'https://x/main_server', 'language' => 'es'],
+            ['language' => 'fi']
+        );
+        $this->assertStringContainsString('"language":"fi"', $output);
+    }
+
     public function testLanguageOverrideDroppedForUnsupportedCode(): void
     {
         $output = CrumbRenderer::render(

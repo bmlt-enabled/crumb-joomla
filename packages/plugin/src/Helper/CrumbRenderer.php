@@ -25,7 +25,9 @@ final class CrumbRenderer
     public const ALLOWED_VIEWS = ['list', 'map'];
 
     /** Languages the widget supports (mirrors src/stores/localization.ts). */
-    public const SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'de', 'pt', 'it', 'sv', 'da', 'el', 'fa', 'pl', 'ru', 'ja'];
+    public const SUPPORTED_LANGUAGES = [
+        'en', 'es', 'fr', 'de', 'pt', 'it', 'sv', 'da', 'el', 'fa', 'pl', 'ru', 'ja', 'fi',
+    ];
 
     /**
      * Build the widget markup. Returns an empty string when no server is
