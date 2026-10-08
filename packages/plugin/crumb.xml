@@ -7,7 +7,7 @@
     <license>GPL v2 or later</license>
     <authorEmail>bmlt-enabled@googlegroups.com</authorEmail>
     <authorUrl>https://github.com/bmlt-enabled/crumb-joomla</authorUrl>
-    <version>0.8.0</version>
+    <version>0.9.0</version>
     <description>PLG_CONTENT_CRUMB_XML_DESCRIPTION</description>
     <namespace path="src">BmltEnabled\Plugin\Content\Crumb</namespace>
 
@@ -83,6 +83,7 @@
                     <option value="pl">Polski (pl)</option>
                     <option value="ru">Русский (ru)</option>
                     <option value="ja">日本語 (ja)</option>
+                    <option value="fi">Suomi (fi)</option>
                 </field>
                 <field
                     name="css_template"

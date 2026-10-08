@@ -23,7 +23,9 @@ class CrumbHelper
     public const ALLOWED_VIEWS = ['list', 'map'];
 
     /** Languages the widget supports (mirrors src/stores/localization.ts). */
-    public const SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'de', 'pt', 'it', 'sv', 'da', 'el', 'fa', 'pl', 'ru', 'ja'];
+    public const SUPPORTED_LANGUAGES = [
+        'en', 'es', 'fr', 'de', 'pt', 'it', 'sv', 'da', 'el', 'fa', 'pl', 'ru', 'ja', 'fi',
+    ];
 
     /**
      * @return array<string,string>
